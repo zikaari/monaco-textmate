@@ -4,7 +4,7 @@
 		"module": "commonjs",
 		"outDir": "dist",
 		"declarationDir": "dist/typings",
-		"noImplicitAny": true,
+		"noImplicitAny": false,
 		"sourceMap": true,
 		"declaration": true
 	},

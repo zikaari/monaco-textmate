@@ -1,0 +1,9 @@
+/.vscode/
+/src/
+/.npmignore
+/.travis.yml
+/gulpfile.js
+/npm-debug.log
+/ThirdPartyNotices.txt
+/tsconfig.json
+/tslint.json

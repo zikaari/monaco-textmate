@@ -1,6 +1,6 @@
 > This repository is a heavily modified version of original `vscode-textmate` package. It's been adjusted here and there to run inside web browsers. All of the file system calls have been removed, most of the API now uses `Promises` and grammars can no longer be loaded synchronously.
 
-⚠ I'd prefer to see this repository where it really belongs. I request anyone from Microsoft to adopt this beauty as soon as possible ⚠
+⚠ I'd prefer to see this repository where it really belongs. I request anyone from Microsoft to adopt this package as soon as possible.
 
 # Monaco TextMate
 

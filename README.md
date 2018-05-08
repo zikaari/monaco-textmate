@@ -28,9 +28,9 @@ import { Registry } from 'monaco-textmate'
     const registry = new Registry({
         // Since we're in browser, `getFilePath` has been removed, therefore you must provide `getGrammarDefinition` hook for things to work
         getGrammarDefinition: async (scopeName) => {
-            // Whenever `Registry.loadGrammar` is called first time per scope name (language id), this function will be called asking you to provide
+            // Whenever `Registry.loadGrammar` is called first time per scope name, this function will be called asking you to provide
             // raw grammar definition. Both JSON and plist formats are accepted.
-            if (scopeName === 'css') {
+            if (scopeName === 'source.css') {
                 return {
                     format: 'json', // can also be `plist`
                     content: await (await fetch(`static/grammars/css.tmGrammar.json`)).text() // must be a string (i.e not a JSON object)
@@ -39,7 +39,7 @@ import { Registry } from 'monaco-textmate'
         }
     })
 
-    const grammar = await registry.loadGrammar('css')
+    const grammar = await registry.loadGrammar('source.css')
 
     console.log(grammar.tokenizeLine('html, body { height: 100%; margin: 0 }'))
     // > {tokens: Array(19), ruleStack: StackElement}

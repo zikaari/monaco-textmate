@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-'use strict';
 
 import { clone } from './utils';
 import { IRawGrammar, IRawRepository, IRawRule } from './types';

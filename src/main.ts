@@ -1,7 +1,6 @@
 /*---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-'use strict';
 
 import { SyncRegistry } from './registry';
 import { parseJSONGrammar, parsePLISTGrammar } from './grammarReader';
@@ -9,9 +8,10 @@ import { Theme } from './theme';
 import { StackElement as StackElementImpl } from './grammar';
 import { IGrammarDefinition, IRawGrammar } from './types';
 
+export { IGrammarDefinition, IRawGrammar }
+
 let DEFAULT_OPTIONS: RegistryOptions = {
 	getGrammarDefinition: (scopeName: string) => null,
-	getFilePath: (scopeName: string) => null,
 	getInjections: (scopeName: string) => null
 };
 
@@ -42,7 +42,6 @@ export interface IRawTheme {
 export interface RegistryOptions {
 	theme?: IRawTheme;
 	getGrammarDefinition(scopeName: string, dependentScope: string): Promise<IGrammarDefinition>;
-	getFilePath(scopeName: string): string;
 	getInjections?(scopeName: string): string[];
 }
 

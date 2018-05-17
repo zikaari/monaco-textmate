@@ -140,27 +140,29 @@ export class Registry {
 			if (!grammarDefinition) {
 				throw new Error(`A tmGrammar load was requested but registry host failed to provide grammar definition`);
 			}
-			if (typeof grammarDefinition.content !== 'string' ||
-				typeof grammarDefinition.format !== 'string' ||
-				(grammarDefinition.format !== 'json' && grammarDefinition.format !== 'plist')
+			if ((grammarDefinition.format !== 'json' && grammarDefinition.format !== 'plist') ||
+				(grammarDefinition.format === 'json' && typeof grammarDefinition.content !== 'object' && typeof grammarDefinition.content !== 'string') ||
+				(grammarDefinition.format === 'plist' && typeof grammarDefinition.content !== 'string')
 			) {
-				throw new TypeError(`Grammar definition must be an object ({content: string, format: 'json' | 'plist'})`);
+				throw new TypeError('Grammar definition must be an object, either `{ content: string | object, format: "json" }` OR `{ content: string, format: "plist" }`)');
 			}
 			const rawGrammar: IRawGrammar = grammarDefinition.format === 'json'
-				? parseJSONGrammar(grammarDefinition.content, 'c://fakepath/grammar.json')
-				: parsePLISTGrammar(grammarDefinition.content, 'c://fakepath/grammar.plist');
-				let injections = (typeof this._locator.getInjections === 'function') && this._locator.getInjections(initialScopeName);
+				? typeof grammarDefinition.content === 'string'
+					? parseJSONGrammar(grammarDefinition.content, 'c://fakepath/grammar.json')
+					: grammarDefinition.content as IRawGrammar
+				: parsePLISTGrammar(grammarDefinition.content as string, 'c://fakepath/grammar.plist');
+			let injections = (typeof this._locator.getInjections === 'function') && this._locator.getInjections(initialScopeName);
 
-				(rawGrammar as any).scopeName = initialScopeName;
-				let deps = this._syncRegistry.addGrammar(rawGrammar, injections);
-				await Promise.all(deps.map(async(scopeNameD) => {
-					try {
-						return this._loadGrammar(scopeNameD, initialScopeName);
-					} catch (error) {
-						throw new Error(`While trying to load tmGrammar with scopeId: '${initialScopeName}', it's dependency (scopeId: ${scopeNameD}) loading errored: ${error.message}`);
-					}
-				}));
-				resolve(this.grammarForScopeName(initialScopeName));
+			(rawGrammar as any).scopeName = initialScopeName;
+			let deps = this._syncRegistry.addGrammar(rawGrammar, injections);
+			await Promise.all(deps.map(async (scopeNameD) => {
+				try {
+					return this._loadGrammar(scopeNameD, initialScopeName);
+				} catch (error) {
+					throw new Error(`While trying to load tmGrammar with scopeId: '${initialScopeName}', it's dependency (scopeId: ${scopeNameD}) loading errored: ${error.message}`);
+				}
+			}));
+			resolve(this.grammarForScopeName(initialScopeName));
 		});
 		this.installationQueue.set(initialScopeName, prom);
 		await prom;

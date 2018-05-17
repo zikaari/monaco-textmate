@@ -16,7 +16,7 @@ export interface ILocatable {
 
 export interface IGrammarDefinition {
 	format: 'json' | 'plist';
-	content: string;
+	content: string | object;
 }
 
 export interface IRawGrammar extends ILocatable {

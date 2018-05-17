@@ -17,7 +17,7 @@ npm install monaco-textmate
 `monaco-textmate` relies on `onigasm` package to provide `oniguruma` regex engine in browsers. `onigasm` itself relies on `WebAssembly`. Therefore to
 get `monaco-textmate` working in your browser, it must have `WebAssembly` support and `onigasm` loaded and ready-to-go.
 
-Make sure the example code below runs *after* `onigasm` bootstraping sequence described [here 🔗](https://www.npmjs.com/package/onigasm#light-it-up) has finished.
+Make sure the example code below runs *after* `onigasm` bootstraping sequence described [here](https://www.npmjs.com/package/onigasm#light-it-up) has finished.
 
 > Example below is just a demostration of available API. To wire it up with `monaco-editor` use [`monaco-editor-textmate`](https://github.com/NeekSandhu/monaco-editor-textmate).
 
@@ -33,7 +33,7 @@ import { Registry } from 'monaco-textmate'
             if (scopeName === 'source.css') {
                 return {
                     format: 'json', // can also be `plist`
-                    content: await (await fetch(`static/grammars/css.tmGrammar.json`)).text() // must be a string (i.e not a JSON object)
+                    content: await (await fetch(`static/grammars/css.tmGrammar.json`)).text() // when format is 'json', parsed JSON also works
                 }
             }
         }

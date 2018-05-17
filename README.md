@@ -19,7 +19,7 @@ get `monaco-textmate` working in your browser, it must have `WebAssembly` suppor
 
 Make sure the example code below runs *after* `onigasm` bootstraping sequence described [here 🔗](https://www.npmjs.com/package/onigasm#light-it-up) has finished.
 
-> Example below is just a demostration of available API. Instructions on how to wire up `monaco-textmate` with `monaco-editor` are yet to come (PR welcome)
+> Example below is just a demostration of available API. To wire it up with `monaco-editor` use [`monaco-editor-textmate`](https://github.com/NeekSandhu/monaco-editor-textmate).
 
 ```javascript
 import { Registry } from 'monaco-textmate'

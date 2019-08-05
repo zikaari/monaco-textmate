@@ -1,6 +1,6 @@
 {
   "name": "monaco-textmate",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Monaco TextMate grammar helpers",
   "main": "./dist/main.js",
   "typings": "./dist/typings/main.d.ts",

@@ -2,8 +2,7 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
 
-import * as path from 'path';
-import { RegexSource, mergeObjects } from './utils';
+import { RegexSource, basename, mergeObjects } from './utils';
 import { ILocation, IRawGrammar, IRawRepository, IRawRule, IRawCaptures } from './types';
 import { OnigString, OnigScanner, IOnigCaptureIndex } from 'onigasm';
 
@@ -49,7 +48,7 @@ export abstract class Rule {
 	}
 
 	public get debugName(): string {
-		return `${(<any>this.constructor).name}#${this.id} @ ${path.basename(this.$location.filename)}:${this.$location.line}`;
+		return `${(<any>this.constructor).name}#${this.id} @ ${basename(this.$location.filename)}:${this.$location.line}`;
 	}
 
 	public getName(lineText: string, captureIndices: IOnigCaptureIndex[]): string {
